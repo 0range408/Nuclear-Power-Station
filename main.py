@@ -38,9 +38,14 @@ with gui.window(label = "Control Rods", tag = "control_rods"):
 with gui.window(label = "Condenser Coolant", tag = "condenser_coolant"):
     pass
 
-with gui.window(label = "Reactor Data", tag = "reactor_data"): #TODO: come up with a better name
-    gui.add_text("add the stuff on the computer about water temp, pressure, etc.")
-    #TODO: add data labels
+with gui.window(label = "Water Data", tag = "reactor_data"): #TODO: come up with a better name
+    pressure = config["water_pressure"]
+    temperature = config["water_temp"]
+    gui.add_text(f"""
+Water Pressure:     {pressure}
+    
+Water Temperature:  {temperature}
+    """)
 
 zone_colors = draw.lerp_rgb((0, 0, 1), (1, 0, 0), 5001)
 zones = config["zones"]
@@ -48,11 +53,8 @@ zones = config["zones"]
 with gui.window(label = "Zone Temperatures", tag = "zone_temperatures"): #FIXME: ugly code
 
     r_a2, g_a2, b_a2 = zone_colors[zones[0][0]]
-
     r_a3, g_a3, b_a3 = zone_colors[zones[0][1]]
-
     r_d2, g_d2, b_d2 = zone_colors[zones[3][0]]
-
     r_d3, g_d3, b_d3 = zone_colors[zones[3][1]]
 
     draw.draw_reactor_zone(

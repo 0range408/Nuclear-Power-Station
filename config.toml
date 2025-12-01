@@ -15,3 +15,7 @@ zones = [ # for now, maximum is 5000
     [ 200, 1500, 10, 200 ],
     [ 5000, 2, ],
 ]
+
+water_temp = 90.0
+
+water_pressure = 25.0
