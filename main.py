@@ -38,6 +38,14 @@ with gui.window(label = "Control Rods", tag = "control_rods"):
 with gui.window(label = "Condenser Coolant", tag = "condenser_coolant"):
     pass
 
+with gui.window(label = "Reactor Data", tag = "reactor_data"): #TODO: come up with a better name
+    gui.add_text("add the stuff on the computer about water temp, pressure, etc.")
+    #TODO: add data labels
+
+with gui.window(label = "Zone Temperatures", tag = "zone_temperatures"):
+    gui.add_text("add zone temperatures for balancing reactor temps")
+    #TODO: add rectangles for zones
+
 gui.create_viewport(title = "Reactor", width = 800, height = 600)
 
 gui.configure_app(docking = True)
