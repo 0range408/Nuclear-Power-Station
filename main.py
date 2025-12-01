@@ -1,4 +1,4 @@
-import toml
+import tomllib as toml
 import dearpygui.dearpygui as gui
 import draw
 import random
@@ -8,7 +8,7 @@ gui.create_context()
 def click(sender, app_data):
     pass
 
-with open("config.toml", "r") as file:
+with open("config.toml", "rb") as file:
     config = toml.load(file)
 
 rows, cols = config["size"]
