@@ -50,29 +50,12 @@ Water Temperature:  {temperature}
 zone_colors = draw.lerp_rgb((0, 0, 1), (1, 0, 0), 5001)
 zones = config["zones"]
 
-with gui.window(label = "Zone Temperatures", tag = "zone_temperatures"): #FIXME: ugly code
+with gui.window(label = "Zone Temperatures", tag = "zone_temperatures"):
 
-    r_a2, g_a2, b_a2 = zone_colors[zones[0][0]]
-    r_a3, g_a3, b_a3 = zone_colors[zones[0][1]]
-    r_d2, g_d2, b_d2 = zone_colors[zones[3][0]]
-    r_d3, g_d3, b_d3 = zone_colors[zones[3][1]]
-
-    draw.draw_reactor_zone(
-        gui,
-        10.0 + 90.0, 10.0,
-        fill = (255 * r_a2, 255 * g_a2, 100 * b_a2),
-        text = zones[0][0]
-    )
-
-    draw.draw_reactor_zone(
-        gui,
-        (10.0 + 90.0) * 2, 10.0,
-        fill = (255 * r_a3, 255 * g_a3, 255 * b_a3),
-        text = zones[0][1]
-    )
-
-    for i in range(1, 3):
+    for i in range(0, 4):
         for j in range (0, 4):
+
+            if config["zones"][i][j] == "skip": continue
 
             r, g, b = zone_colors[zones[i][j]]
 
@@ -82,20 +65,6 @@ with gui.window(label = "Zone Temperatures", tag = "zone_temperatures"): #FIXME:
                 fill = (255 * r, 255 * g, 255 * b),
                 text = zones[i][j]
             )
-
-    draw.draw_reactor_zone(
-        gui,
-        10.0 + 90.0, 10.0 + 60.0 * 3,
-        fill = (255 * r_d2, 255 * g_d2, 255 * b_d2),
-        text = zones[3][0]
-    )
-
-    draw.draw_reactor_zone(
-        gui,
-        (10.0 + 90.0) * 2, 10.0 + 60.0 * 3,
-        fill = (255 * r_d3, 255 * g_d3, 255 * b_d3),
-        text = zones[3][1]
-    )
 
 
 gui.create_viewport(title = "Reactor", width = 800, height = 600)
