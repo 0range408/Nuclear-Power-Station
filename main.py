@@ -1,4 +1,4 @@
-import toml
+import tomllib as toml
 import dearpygui.dearpygui as gui
 import draw
 import random
@@ -8,7 +8,7 @@ gui.create_context()
 def click(sender, app_data):
     pass
 
-with open("config.toml", "r") as file:
+with open("config.toml", "rb") as file:
     config = toml.load(file)
 
 rows, cols = config["size"]
@@ -37,6 +37,35 @@ with gui.window(label = "Control Rods", tag = "control_rods"):
 
 with gui.window(label = "Condenser Coolant", tag = "condenser_coolant"):
     pass
+
+with gui.window(label = "Water Data", tag = "reactor_data"): #TODO: come up with a better name
+    pressure = config["water_pressure"]
+    temperature = config["water_temp"]
+    gui.add_text(f"""
+Water Pressure:     {pressure}
+    
+Water Temperature:  {temperature}
+    """)
+
+zone_colors = draw.lerp_rgb((0, 0, 0.2), (1, 0, 0), 5001)
+zones = config["zones"]
+
+with gui.window(label = "Zone Temperatures", tag = "zone_temperatures"):
+
+    for i in range(0, 4):
+        for j in range (0, 4):
+
+            if config["zones"][i][j] == "skip": continue
+
+            r, g, b = zone_colors[zones[i][j]]
+
+            draw.draw_reactor_zone(
+                gui,
+                (10.0 + 90.0) * j, 10.0 + 60.0 * i,
+                fill = (255 * r, 255 * g, 255 * b),
+                text = zones[i][j]
+            )
+
 
 gui.create_viewport(title = "Reactor", width = 800, height = 600)
 
